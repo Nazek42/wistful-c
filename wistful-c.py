@@ -22,7 +22,8 @@ SUBS = [
     (r"wish (.*?) upon a star", r"puts(\1);"),
     (r"if only (<.*?>) were included\.\.\.", add_to_includes),
     (r"if only ([\w *]+) were (.*?)\.\.\.", r"\1 = \2;"),
-    (r"\*sigh\*", "}"),
+    (r"if only I could return (.*?)\.\.\.", r"return \1;",
+    (r"\*sigh\*", "}",
     (r"if (.*?) ?\.\.\.", r"if(\1) {"),
     (r" +were +", r"==")
 ]
