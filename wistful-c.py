@@ -24,16 +24,16 @@ SUBS = [
     (r" +were +", r"==")
 ]
 
-def main():
+def compile_code(code):
     includes = []
     
     def add_to_includes(matchobj):
         includes.append("#include " + matchobj.group(1))
     
-    with open(sys.argv[1]) as code:
-        compiled = reduce(lambda code, sub: re.sub(sub[0], sub[1], code), SUBS, code)
-    compiled = "\n".join(includes)+"\nint main() {" + compiled + "}"
-    
+    compiled = reduce(lambda code, sub: re.sub(sub[0], sub[1], code), SUBS, code)
+    return "\n".join(includes)+"\nint main() {" + compiled + "}"
+
+def run_code(compiled):
     with open("temp.c", "wt") as source_file:
         source_file.write(compiled)
         
@@ -44,4 +44,5 @@ def main():
     os.remove("temp.c")
 
 if __name__ == "__main__":
-    main()
+    with open(sys.argv[1]) as code_file:
+        run_code(compile_code(code_file.read()))
