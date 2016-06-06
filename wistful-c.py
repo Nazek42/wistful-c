@@ -14,11 +14,6 @@ import subprocess
 import os
 import sys
 
-includes = []
-
-def add_to_includes(matchobj):
-    includes.append("#include " + matchobj.group(1))
-
 SUBS = [
     (r"if wishes were horses\.\.\.", "exit(0);"),
     (r"wish (.*?) upon a star", r"puts(\1);"),
@@ -29,16 +24,24 @@ SUBS = [
     (r" +were +", r"==")
 ]
 
-with open(sys.argv[1]) as code:
-    compiled = reduce(lambda code, sub: re.sub(sub[0], sub[1], code), SUBS, code)
-compiled = "\n".join(includes)+"\nint main() {" + compiled + "}"
-
-with open("temp.c", "wt") as source_file:
-    source_file.write(compiled)
+def main():
+    includes = []
     
-subprocess.call(["gcc", "-w", "-o", "temp", "temp.c"])
-subprocess.call(["./temp"])
+    def add_to_includes(matchobj):
+        includes.append("#include " + matchobj.group(1))
+    
+    with open(sys.argv[1]) as code:
+        compiled = reduce(lambda code, sub: re.sub(sub[0], sub[1], code), SUBS, code)
+    compiled = "\n".join(includes)+"\nint main() {" + compiled + "}"
+    
+    with open("temp.c", "wt") as source_file:
+        source_file.write(compiled)
+        
+    subprocess.call(["gcc", "-w", "-o", "temp", "temp.c"])
+    subprocess.call(["./temp"])
+    
+    os.remove("temp")
+    os.remove("temp.c")
 
-
-os.remove("temp")
-os.remove("temp.c")
+if __name__ == "__main__":
+    main()
