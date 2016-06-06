@@ -20,12 +20,15 @@ def add_to_includes(matchobj):
 SUBS = [
     (r"if wishes were horses\.\.\.", "exit(0);"),
     (r"wish (.*?) upon a star", r"puts(\1);"),
+    (r"wish for a (.*?) in (.*?)", r"scanf(\1, \2);"),
     (r"if only (<.*?>) were included\.\.\.", add_to_includes),
     (r"if only ([\w *]+) were (.*?)\.\.\.", r"\1 = \2;"),
-    (r"if only I could return (.*?)\.\.\.", r"return \1;",
+    (r"if only I could return (.*?)\.\.\.", r"return \1;"),
     (r"\*sigh\*", "}",
     (r"if (.*?) ?\.\.\.", r"if(\1) {"),
-    (r" +were +", r"==")
+    (r"keep hoping that (.*?) ?\.\.\.", r"while(\1) {"),
+    (r"someday (.*?) ?\.\.\.", r"while(!(\1)) {"),
+    (r" +were +", r"=="),
 ]
 
 includes = []
