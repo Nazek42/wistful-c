@@ -11,6 +11,8 @@ if wishes were horses..."""
 import re
 from functools import reduce
 import subprocess
+import os
+import sys
 
 includes = []
 
@@ -36,3 +38,7 @@ with open("temp.c", "wt") as source_file:
     
 subprocess.call(["gcc", "-w", "-o", "temp", "temp.c"])
 subprocess.call(["./temp"])
+
+
+os.remove("temp")
+os.remove("temp.c")
