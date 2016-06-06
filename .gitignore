@@ -1,4 +1,3 @@
 *.pyc
-*.sigh
 __pycache__
 tempsigh*
