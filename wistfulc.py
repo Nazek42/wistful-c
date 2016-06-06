@@ -19,23 +19,23 @@ def add_to_includes(matchobj):
 
 SUBS = [
     (r"if wishes were horses\.\.\.", "exit(0);"),
+    (r'wish for (.*?) upon a star', r"scanf(\1);"),
     (r"wish (.*?) upon a star", r"puts(\1);"),
-    (r"wish for a (.*?) in (.*?)", r"scanf(\1, \2);"),
     (r"if only (<.*?>) were included\.\.\.", add_to_includes),
     (r"if only ([\w *]+) were (.*?)\.\.\.", r"\1 = \2;"),
     (r"if only I could return (.*?)\.\.\.", r"return \1;"),
-    (r"\*sigh\*", "}",
+    (r"\*sigh\*", "}"),
     (r"if (.*?) ?\.\.\.", r"if(\1) {"),
-    (r"keep hoping that (.*?) ?\.\.\.", r"while(\1) {"),
+    (r"wait for (.*?) to change\.\.\.", r"while(\1) {"),
     (r"someday (.*?) ?\.\.\.", r"while(!(\1)) {"),
-    (r" +were +", r"=="),
+    (r" +were +", r" == "),
+    (r" +will be +", r" == "),
 ]
 
-includes = []
+includes = ["#include <stdbool.h>"]
 
 def compile_code(code):
     global includes
-    includes = []
     
     compiled = reduce(lambda code, sub: re.sub(sub[0], sub[1], code), SUBS, code)
     return "\n".join(includes)+"\nint main() {" + compiled + "}"
