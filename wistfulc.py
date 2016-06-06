@@ -41,14 +41,16 @@ def compile_code(code):
     return "\n".join(includes)+"\nint main() {" + compiled + "}"
 
 def run_code(compiled):
-    with open("temp.c", "wt") as source_file:
+    exepath = "tempsigh" + str(os.getpid())
+    srcpath = exepath + ".c"
+    with open(srcpath, "wt") as source_file:
         source_file.write(compiled)
         
-    subprocess.call(["gcc", "-w", "-o", "temp", "temp.c"])
-    subprocess.call(["./temp"])
+    subprocess.call(["gcc", "-w", "-o", exepath, srcpath])
+    subprocess.call(["./" + exepath])
     
-    os.remove("temp")
-    os.remove("temp.c")
+    os.remove(exepath)
+    os.remove(srcpath)
 
 if __name__ == "__main__":
     with open(sys.argv[1]) as code_file:
