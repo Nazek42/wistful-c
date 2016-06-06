@@ -14,6 +14,9 @@ import subprocess
 import os
 import sys
 
+def add_to_includes(matchobj):
+    includes.append("#include " + matchobj.group(1))
+
 SUBS = [
     (r"if wishes were horses\.\.\.", "exit(0);"),
     (r"wish (.*?) upon a star", r"puts(\1);"),
@@ -26,9 +29,6 @@ SUBS = [
 
 def compile_code(code):
     includes = []
-    
-    def add_to_includes(matchobj):
-        includes.append("#include " + matchobj.group(1))
     
     compiled = reduce(lambda code, sub: re.sub(sub[0], sub[1], code), SUBS, code)
     return "\n".join(includes)+"\nint main() {" + compiled + "}"
