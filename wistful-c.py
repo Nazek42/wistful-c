@@ -27,7 +27,10 @@ SUBS = [
     (r" +were +", r"==")
 ]
 
+includes = []
+
 def compile_code(code):
+    global includes
     includes = []
     
     compiled = reduce(lambda code, sub: re.sub(sub[0], sub[1], code), SUBS, code)
