@@ -4,6 +4,11 @@ A version of C that has seen better days...
 ### Usage
 `python3 wistfulc.py [FILE]`
 
+Alternatively, add this alias to your `.bashrc`:
+
+    alias wistful_c='python3 /<path to wistful-c>/wistfulc.py'
+
+
 ### Substitutions
 | Statement | Translation |
 |-----------|-------------|
