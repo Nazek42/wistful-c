@@ -20,7 +20,7 @@ def add_to_includes(matchobj):
 SUBS = [
     (r"if wishes were horses\.\.\.", "exit(0);"),
     (r'wish for (.*?) upon a star', r"scanf(\1);"),
-    (r"wish (.*?) upon a star", r"puts(\1);"),
+    (r"wish (.*?) upon a star", r"printf(\1);"),
     (r"if only (<.*?>) were included\.\.\.", add_to_includes),
     (r"if only ([\w *]+) were (.*?)\.\.\.", r"\1 = \2;"),
     (r"if only I could return (.*?)\.\.\.", r"return \1;"),
