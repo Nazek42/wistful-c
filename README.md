@@ -1,6 +1,16 @@
 # WistfulC
 A version of C that has seen better days...
 
+Creators:
+
+<a href="http://stackexchange.com/users/6984934/bkul">
+![bkul](http://stackexchange.com/users/flair/6984934.png)
+</a>
+
+<a href="http://stackexchange.com/users/4781699/maltysen">
+![Maltysen](http://stackexchange.com/users/flair/4781699.png)
+</a>
+
 ### Usage
 `python3 wistfulc.py [FILE]`
 
